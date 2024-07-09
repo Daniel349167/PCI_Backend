@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\PasswordController;
+use App\Http\Controllers\Auth\SocialiteController;
+
+Route::middleware(['api', 'web'])->group(function () {
+    Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle']);
+    Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
+});
 
 Route::post('register', [ApiController::class, 'register']);
 Route::post('login', [ApiController::class, 'login']);
