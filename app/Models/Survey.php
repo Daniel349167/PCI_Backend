@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Survey extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'number',
         'time',
         'image',
-        'user_id',
+        'sample_id',
     ];
 
     protected $hidden = [
-        'user_id',
+        'sample_id',
     ];
 
     protected $casts = [

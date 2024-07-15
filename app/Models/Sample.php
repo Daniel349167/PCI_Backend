@@ -5,19 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Sample extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'number',
         'time',
         'image',
-        'user_id',
+        'project_id',
     ];
 
     protected $hidden = [
-        'user_id',
+        'project_id',
     ];
 
     protected $casts = [

@@ -30,7 +30,12 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Project::create([
+            "user_id" => auth()->user()->id,
+            "name" => $request['name'],
+            "time" => $request['time'],
+            "image" => $request['image']
+        ]);
     }
 
     /**
@@ -62,6 +67,6 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
     }
 }
