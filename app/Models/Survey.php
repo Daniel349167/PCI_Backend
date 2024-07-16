@@ -13,6 +13,9 @@ class Survey extends Model
         'number',
         'time',
         'image',
+        'type',
+        'severity',
+        'quanity',
         'sample_id',
     ];
 

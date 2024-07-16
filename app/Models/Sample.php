@@ -13,6 +13,9 @@ class Sample extends Model
         'number',
         'time',
         'image',
+        'from',
+        'to',
+        'section',
         'project_id',
     ];
 

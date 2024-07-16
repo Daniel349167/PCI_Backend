@@ -24,6 +24,10 @@ class SampleController extends Controller
         ]);
     }
 
+    public function edit(Request $request, string $id) {
+        ;
+    }
+
     public function destroy(Sample $sample)
     {
         $sample->delete();

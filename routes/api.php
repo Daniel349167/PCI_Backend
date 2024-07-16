@@ -26,6 +26,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('projects', [ProjectController::class, 'store']);
     Route::get('samples/{id}', [SampleController::class, 'index']);
     Route::post('samples/{id}', [SampleController::class, 'store']);
+    Route::post('samples/{id}/edit', [SampleController::class, 'edit']);
     Route::get('surveys/{id}', [SurveyController::class, 'index']);
     Route::post('surveys/{id}', [SurveyController::class, 'store']);
+    Route::post('surveys/{id}/edit', [SurveyController::class, 'edit']);
 });
