@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('samples', function($table) {
-            $table->integer('section')->nullable()->after('image');
-            $table->dateTime('to')->nullable()->after('image');
-            $table->dateTime('from')->nullable()->after('image');
+            $table->boolean('section')->nullable()->after('image');
+            $table->string('to')->nullable()->after('image');
+            $table->string('from')->nullable()->after('image');
         });
         Schema::table('surveys', function($table) {
             $table->integer('quantity')->nullable()->after('image');

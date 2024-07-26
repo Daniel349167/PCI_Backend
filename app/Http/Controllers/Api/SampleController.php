@@ -14,6 +14,11 @@ class SampleController extends Controller
         return $samples;
     }
 
+    public function read($id) {
+        $sample = Sample::where('id', $id)->first();
+        return $sample;
+    }
+
     public function store(Request $request, string $id)
     {
         Sample::create([

@@ -8,13 +8,18 @@ use Illuminate\Http\Request;
 
 class SurveyController extends Controller
 {
-    public function index(string $id)
+    public function index($id)
     {
         $surveys = Survey::where('sample_id', $id)->get();
         return $surveys;
     }
 
-    public function store(Request $request, string $id)
+    public function read($id) {
+        $survey = Survey::where('id', $id)->first();
+        return $survey;
+    }
+
+    public function store(Request $request, $id)
     {
         Survey::create([
             "sample_id" => $id,
