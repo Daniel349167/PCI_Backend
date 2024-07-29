@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Survey;
+use App\Models\Damage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class SurveyController extends Controller
+class DamageController extends Controller
 {
     public function index($id)
     {
-        $surveys = Survey::where('sample_id', $id)->get();
-        return $surveys;
+        $damages = Damage::where('sample_id', $id)->get();
+        return $damages;
     }
 
     public function read($id) {
-        $survey = Survey::where('id', $id)->first();
-        return $survey;
+        $damage = Damage::where('id', $id)->first();
+        return $damage;
     }
 
     public function store(Request $request, $id)
     {
-        Survey::create([
+        Damage::create([
             "sample_id" => $id,
             "number" => $request['number'],
             "time" => $request['time'],
@@ -29,8 +29,8 @@ class SurveyController extends Controller
         ]);
     }
 
-    public function destroy(Survey $surveys)
+    public function destroy(Damage $damages)
     {
-        $surveys->delete();
+        $damages->delete();
     }
 }

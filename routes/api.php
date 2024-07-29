@@ -7,7 +7,7 @@ use App\Http\Controllers\Auth\SocialiteController;
 
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SampleController;
-use App\Http\Controllers\Api\SurveyController;
+use App\Http\Controllers\Api\DamageController;
 
 Route::middleware(['api', 'web'])->group(function () {
     Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle']);
@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('samples/{id}', [SampleController::class, 'index']);
     Route::post('samples/{id}', [SampleController::class, 'store']);
     Route::post('samples/{id}/edit', [SampleController::class, 'edit']);
-    Route::get('surveys/{id}', [SurveyController::class, 'index']);
-    Route::post('surveys/{id}', [SurveyController::class, 'store']);
-    Route::post('surveys/{id}/edit', [SurveyController::class, 'edit']);
+    Route::get('damages/{id}', [DamageController::class, 'index']);
+    Route::post('damages/{id}', [DamageController::class, 'store']);
+    Route::post('damages/{id}/edit', [DamageController::class, 'edit']);
 });
