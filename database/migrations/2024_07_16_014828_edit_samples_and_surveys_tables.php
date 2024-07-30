@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('samples', function($table) {
-            $table->boolean('section')->nullable()->after('image');
-            $table->string('to')->nullable()->after('image');
-            $table->string('from')->nullable()->after('image');
+            $table->char('section', 1)->nullable()->after('image');
+            $table->integer('to_m')->nullable()->after('image');
+            $table->integer('to_km')->nullable()->after('image');
+            $table->integer('from_m')->nullable()->after('image');
+            $table->integer('from_km')->nullable()->after('image');
         });
         Schema::table('surveys', function($table) {
             $table->integer('quantity')->nullable()->after('image');
@@ -29,8 +31,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('samples', function($table) {
-            $table->dropColumn('from');
-            $table->dropColumn('to');
+            $table->dropColumn('from_km');
+            $table->dropColumn('from_m');
+            $table->dropColumn('to_km');
+            $table->dropColumn('to_m');
             $table->dropColumn('section');
         });
         Schema::table('surveys', function($table) {

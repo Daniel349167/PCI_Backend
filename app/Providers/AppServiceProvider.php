@@ -11,7 +11,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // $this->app->register('Barryvdh\Debugbar\ServiceProvider');
     }
 
     /**
@@ -19,6 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app['request']->server->set('HTTPS', true);
     }
 }
