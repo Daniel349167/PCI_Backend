@@ -29,6 +29,11 @@ class DamageController extends Controller
         ]);
     }
 
+    public function update(Request $request, string $id) {
+        $damage = Damage::find($id);
+        $damage->update($request->all());
+    }
+
     public function destroy(Damage $damages)
     {
         $damages->delete();

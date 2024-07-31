@@ -24,10 +24,12 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('projects', [ProjectController::class, 'index']);
     Route::post('projects', [ProjectController::class, 'store']);
-    Route::get('samples/{id}', [SampleController::class, 'index']);
+    Route::get('projects/{id}/samples', [SampleController::class, 'index']);
     Route::post('samples/{id}', [SampleController::class, 'store']);
-    Route::post('samples/{id}/edit', [SampleController::class, 'edit']);
-    Route::get('damages/{id}', [DamageController::class, 'index']);
+    Route::get('samples/{id}', [SampleController::class, 'read']);
+    Route::post('samples/{id}/update', [SampleController::class, 'update']);
+    Route::get('samples/{id}/damages', [DamageController::class, 'index']);
     Route::post('damages/{id}', [DamageController::class, 'store']);
-    Route::post('damages/{id}/edit', [DamageController::class, 'edit']);
+    Route::get('damages/{id}', [DamageController::class, 'read']);
+    Route::post('damages/{id}/update', [DamageController::class, 'update']);
 });

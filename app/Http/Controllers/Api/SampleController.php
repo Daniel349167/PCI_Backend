@@ -29,8 +29,9 @@ class SampleController extends Controller
         ]);
     }
 
-    public function edit(Request $request, string $id) {
-        ;
+    public function update(Request $request, string $id) {
+        $sample = Sample::find($id);
+        $sample->update($request->all());
     }
 
     public function destroy(Sample $sample)
