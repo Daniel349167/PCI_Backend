@@ -15,7 +15,7 @@ class Damage extends Model
         'image',
         'type',
         'severity',
-        'quanity',
+        'amount',
         'sample_id',
     ];
 

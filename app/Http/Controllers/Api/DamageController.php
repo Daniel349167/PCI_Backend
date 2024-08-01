@@ -10,7 +10,7 @@ class DamageController extends Controller
 {
     public function index($id)
     {
-        $damages = Damage::where('sample_id', $id)->get();
+        $damages = Damage::where('sample_id', $id)->orderBy('id', 'asc')->get();
         return $damages;
     }
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('from_km')->nullable()->after('image');
         });
         Schema::table('surveys', function($table) {
-            $table->integer('quantity')->nullable()->after('image');
+            $table->integer('amount')->nullable()->after('image');
             $table->integer('severity')->nullable()->after('image');
             $table->integer('type')->nullable()->after('image');
         });
@@ -40,7 +40,7 @@ return new class extends Migration
         Schema::table('surveys', function($table) {
             $table->dropColumn('type');
             $table->dropColumn('severity');
-            $table->dropColumn('quantity');
+            $table->dropColumn('amount');
         });
     }
 };

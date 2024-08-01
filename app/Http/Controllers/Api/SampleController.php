@@ -10,7 +10,7 @@ class SampleController extends Controller
 {
     public function index(string $id)
     {
-        $samples = Sample::where('project_id', $id)->get();
+        $samples = Sample::where('project_id', $id)->orderBy('id', 'asc')->get();
         return $samples;
     }
 

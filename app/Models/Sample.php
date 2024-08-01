@@ -13,8 +13,10 @@ class Sample extends Model
         'number',
         'time',
         'image',
-        'from',
-        'to',
+        'from_km',
+        'from_m',
+        'to_km',
+        'to_m',
         'section',
         'project_id',
     ];
