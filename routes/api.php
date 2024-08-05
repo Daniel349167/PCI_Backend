@@ -32,4 +32,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('damages/{id}', [DamageController::class, 'store']);
     Route::get('damages/{id}', [DamageController::class, 'read']);
     Route::post('damages/{id}/update', [DamageController::class, 'update']);
+    Route::get('damages/{id}/image', [DamageController::class, 'getImage']);
 });

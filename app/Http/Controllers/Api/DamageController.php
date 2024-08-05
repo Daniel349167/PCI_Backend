@@ -10,13 +10,21 @@ class DamageController extends Controller
 {
     public function index($id)
     {
-        $damages = Damage::where('sample_id', $id)->orderBy('id', 'asc')->get();
+        $damages = Damage::select('id', 'number', 'time', 'type', 'severity', 'amount')
+            ->where('sample_id', $id)->orderBy('id', 'asc')->get();
         return $damages;
     }
 
     public function read($id) {
-        $damage = Damage::where('id', $id)->first();
+        $damage = Damage::select('id', 'number', 'time', 'type', 'severity', 'amount')
+            ->where('id', $id)->first();
         return $damage;
+    }
+
+    public function getImage($id) {
+        $image = Damage::select('image')
+            ->where('id', $id)->first();
+        return $image;
     }
 
     public function store(Request $request, $id)
