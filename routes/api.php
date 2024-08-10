@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\SampleController;
 use App\Http\Controllers\Api\DamageController;
 
 use App\Http\Controllers\Api\DamageMeasurementController;
+use App\Http\Controllers\Api\DeductedValuesController;
 
 Route::middleware(['api', 'web'])->group(function () {
     Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle']);
@@ -38,5 +39,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //Metrado de Daños
     Route::get('damage-measurement/{projectId}/{sampleId}', [DamageMeasurementController::class, 'getSummaryBySampleId']);
+
+    //Valores Deducidos
+    Route::get('deducted-values/{projectId}/{sampleId}', [DeductedValuesController::class, 'getDeductedValues']);
+
 
 });
