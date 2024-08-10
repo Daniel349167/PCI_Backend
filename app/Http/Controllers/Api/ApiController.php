@@ -64,12 +64,4 @@ class ApiController extends Controller
         ]);
     }
 
-    public function profile()
-    {
-        return response()->json([
-            'status' => true,
-            'message' => 'Profile information',
-            'data' => auth()->user()
-        ]);
-    }
 }

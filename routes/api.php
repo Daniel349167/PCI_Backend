@@ -37,5 +37,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('damages/{id}/image', [DamageController::class, 'getImage']);
 
     //Metrado de Daños
-    Route::get('/damage-measurement/{sampleId}', [DamageMeasurementController::class, 'getSummaryBySampleId']);
+    Route::get('damage-measurement/{projectId}/{sampleId}', [DamageMeasurementController::class, 'getSummaryBySampleId']);
+
 });

@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Damage;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 class DamageMeasurementController extends Controller
 {
-    public function getSummaryBySampleId($sampleId)
+    public function getSummaryBySampleId($projectId, $sampleId)
     {
         $damages = Damage::where('sample_id', $sampleId)
+            ->whereHas('sample', function ($query) use ($projectId) {
+                $query->where('project_id', $projectId);
+            })
             ->select('type', 'severity', DB::raw('SUM(amount) as metrado'))
             ->groupBy('type', 'severity')
-            ->orderBy('type', 'asc')  // Asegúrate de que esté ordenado por tipo de fallo (type)
-            ->orderBy('severity', 'asc')  // (Opcional) también puedes ordenar por severidad
+            ->orderBy('type', 'asc')
+            ->orderBy('severity', 'asc')
             ->get();
 
         $summary = [];
@@ -37,7 +39,6 @@ class DamageMeasurementController extends Controller
 
     private function mapSeverity($severity)
     {
-        // Mapear la severidad a un valor más comprensible
         $severities = [
             1 => 'L', // Low
             2 => 'M', // Medium

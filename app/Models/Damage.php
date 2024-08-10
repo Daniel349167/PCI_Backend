@@ -26,4 +26,9 @@ class Damage extends Model
     protected $casts = [
         'time' => 'datetime',
     ];
+
+    public function sample()
+    {
+        return $this->belongsTo(Sample::class);
+    }
 }
