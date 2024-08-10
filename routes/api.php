@@ -9,6 +9,8 @@ use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SampleController;
 use App\Http\Controllers\Api\DamageController;
 
+use App\Http\Controllers\Api\DamageMeasurementController;
+
 Route::middleware(['api', 'web'])->group(function () {
     Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle']);
     Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
@@ -33,4 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('damages/{id}', [DamageController::class, 'read']);
     Route::post('damages/{id}/update', [DamageController::class, 'update']);
     Route::get('damages/{id}/image', [DamageController::class, 'getImage']);
+
+    //Metrado de Daños
+    Route::get('/damage-measurement/{sampleId}', [DamageMeasurementController::class, 'getSummaryBySampleId']);
 });
