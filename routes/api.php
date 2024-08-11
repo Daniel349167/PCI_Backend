@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\DamageController;
 
 use App\Http\Controllers\Api\DamageMeasurementController;
 use App\Http\Controllers\Api\DeductedValuesController;
+use App\Http\Controllers\Api\PCIController;
 
 Route::middleware(['api', 'web'])->group(function () {
     Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle']);
@@ -24,7 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('profile', [ApiController::class, 'profile']);
     Route::get('logout', [ApiController::class, 'logout']);
     Route::post('change-password', [PasswordController::class, 'changePassword']);
-    
+
     Route::get('projects', [ProjectController::class, 'index']);
     Route::post('projects', [ProjectController::class, 'store']);
     Route::get('projects/{id}/samples', [SampleController::class, 'index']);
@@ -43,5 +44,6 @@ Route::middleware('auth:sanctum')->group(function () {
     //Valores Deducidos
     Route::get('deducted-values/{projectId}/{sampleId}', [DeductedValuesController::class, 'getDeductedValues']);
 
-
+    //PCI
+    Route::get('calculate-pci/{projectId}', [PCIController::class, 'calculatePCI']);
 });
