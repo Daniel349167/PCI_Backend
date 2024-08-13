@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('damages', function (Blueprint $table) {
             // Cambiar el tipo de dato de la columna 'amount' a decimal con 1 decimal
-            $table->decimal('amount', 8, 1)->change();
+            $table->decimal('amount', 8, 1)->nullable()->change();
         });
     }
 
@@ -24,7 +24,7 @@ return new class extends Migration
     {
         Schema::table('damages', function (Blueprint $table) {
             // Revertir el tipo de dato de la columna 'amount' a su tipo original 'numeric'
-            $table->integer('amount')->change();
+            $table->integer('amount')->nullable()->change();
         });
     }
 };
