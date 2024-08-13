@@ -48,12 +48,14 @@ class PCIController extends Controller
                 $m = 1 + (9 / 98) * (100 - $hdv);
                 $m = min($m, 10); // m no puede ser mayor que 10
 
-                // Redondear m al entero superior para definir la cantidad de valores a considerar
-                $numValuesToConsider = ceil($m);
+               // Ajustar m si es mayor que el número de valores deducidos
+                $numValuesToConsider = min(ceil($m), count($vdValues));
 
-                // Tomar los valores VD más grandes según m y corregir el último
+                // Tomar los valores VD más grandes según m
                 $correctedVdValues = array_slice($vdValues, 0, $numValuesToConsider);
-                if ($numValuesToConsider > 1 && $m > ($numValuesToConsider - 1)) {
+
+                // Corregir el último valor solo si m es menor que el tamaño del array
+                if ($numValuesToConsider > 1 && $m < count($vdValues)) {
                     $correctionFactor = $m - ($numValuesToConsider - 1);
                     $correctedVdValues[$numValuesToConsider - 1] *= $correctionFactor;
                 }
@@ -63,6 +65,7 @@ class PCIController extends Controller
 
                 // Calcular CDV para cada q usando las fórmulas proporcionadas
                 $cdvs = array_map(fn($total, $q) => $this->calculateCDV($total, $q), $totals, range(1, count($totals)));
+
 
                 // Obtener el mayor CDV
                 $maxCDV = max($cdvs);
