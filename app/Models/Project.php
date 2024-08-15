@@ -14,6 +14,9 @@ class Project extends Model
         'time',
         'image',
         'user_id',
+        'longitudum',
+        'anchoum',
+        'longitudcarretera'
     ];
 
     protected $hidden = [

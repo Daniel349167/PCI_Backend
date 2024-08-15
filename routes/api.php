@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('projects', [ProjectController::class, 'index']);
     Route::post('projects', [ProjectController::class, 'store']);
+    Route::get('projects/{id}', [ProjectController::class, 'read']);
     Route::get('projects/{id}/samples', [SampleController::class, 'index']);
     Route::post('samples/{id}', [SampleController::class, 'store']);
     Route::get('samples/{id}', [SampleController::class, 'read']);
