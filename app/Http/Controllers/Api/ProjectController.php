@@ -54,6 +54,11 @@ class ProjectController extends Controller
         }
     }
 
+    public function update(Request $request, string $id) {
+        $project = Project::find($id);
+        $project->update($request->all());
+    }
+
     public function destroy(Project $project)
     {
         $project->delete();
