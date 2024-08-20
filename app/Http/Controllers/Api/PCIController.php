@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Sample;
+use App\Models\Damage;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Api\DeductedValuesController;
 
@@ -10,8 +11,13 @@ class PCIController extends Controller
 {
     public function calculatePCI($projectId)
     {
-        // Obtener todas las muestras del proyecto en orden
-        $samples = Sample::where('project_id', $projectId)
+        // Obtener todos los samples con daños en el proyecto
+        $samplesWithDamage = Damage::whereHas('sample', function ($query) use ($projectId) {
+            $query->where('project_id', $projectId);
+        })->pluck('sample_id')->unique();
+
+        // Obtener todas las muestras del proyecto que tienen daños
+        $samples = Sample::whereIn('id', $samplesWithDamage)
             ->orderBy('from_km')
             ->orderBy('from_m')
             ->get();
@@ -48,7 +54,7 @@ class PCIController extends Controller
                 $m = 1 + (9 / 98) * (100 - $hdv);
                 $m = min($m, 10); // m no puede ser mayor que 10
 
-               // Ajustar m si es mayor que el número de valores deducidos
+                // Ajustar m si es mayor que el número de valores deducidos
                 $numValuesToConsider = min(ceil($m), count($vdValues));
 
                 // Tomar los valores VD más grandes según m
@@ -66,13 +72,12 @@ class PCIController extends Controller
                 // Calcular CDV para cada q usando las fórmulas proporcionadas
                 $cdvs = array_map(fn($total, $q) => $this->calculateCDV($total, $q), $totals, range(1, count($totals)));
 
-
                 // Obtener el mayor CDV
                 $maxCDV = max($cdvs);
             }
 
-            // Calcular el PCI
-            $pci = 100 - $maxCDV;
+            // Calcular el PCI y redondearlo a 1 decimal
+            $pci = round(100 - $maxCDV, 1);
 
             // Determinar la condición basada en el PCI
             $condition = $this->determineCondition($pci);
