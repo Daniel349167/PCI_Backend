@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Project;
 use App\Models\Sample;
+use App\Models\Damage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -59,16 +60,22 @@ class ProjectController extends Controller
         $project->update($request->all());
     }
 
-    public function destroy(Project $project)
-    {
-        $project->delete();
-    }
-
     public function image($project) {
         $samples = Sample::where('project_id', $project->id)->orderBy('id', 'asc')->get();
         foreach($samples as $sample)
             if($sample)
                 return SampleController::image($sample);
         return null; 
+    }
+
+    public function delete($id)
+    {
+        $project = Project::find($id);
+        foreach(Sample::where('project_id', $id)->get() as $sample) {
+            foreach(Damage::where('sample_id', $sample->id)->get() as $damage)
+                $damage->delete();
+            $sample->delete();
+        }
+        $project->delete();
     }
 }
