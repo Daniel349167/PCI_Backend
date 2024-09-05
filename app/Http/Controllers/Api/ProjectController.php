@@ -78,4 +78,27 @@ class ProjectController extends Controller
         }
         $project->delete();
     }
+
+    public function updateProjectName(Request $request, $id)
+    {
+        // Validar los datos recibidos
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        // Buscar el proyecto por su ID
+        $project = Project::find($id);
+
+        // Verificar que el proyecto exista
+        if (!$project) {
+            return response()->json(['message' => 'Project not found'], 404);
+        }
+
+        // Actualizar el nombre del proyecto
+        $project->name = $validatedData['name'];
+        $project->save();
+
+        // Retornar respuesta exitosa
+        return response()->json(['message' => 'Project name updated successfully'], 200);
+    }
 }
