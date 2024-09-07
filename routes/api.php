@@ -18,6 +18,7 @@ Route::middleware(['api', 'web'])->group(function () {
     Route::get('auth/google/callback', [SocialiteController::class, 'handleGoogleCallback']);
 });
 
+
 Route::post('register', [ApiController::class, 'register']);
 Route::post('login', [ApiController::class, 'login']);
 

@@ -7,6 +7,8 @@ use App\Models\Sample;
 use App\Models\Damage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 use App\Http\Controllers\Api\SampleController;
 
@@ -14,7 +16,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::where('user_id', auth()->user()->id)->orderBy('id', 'asc')->get();
+        $projects = Project::where('user_id', Auth::user()->id)->orderBy('id', 'asc')->get();
         foreach($projects as $project)
             $project->image = ProjectController::image($project);
         return $projects;
@@ -28,7 +30,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $project = Project::create([
-            "user_id" => auth()->user()->id,
+            "user_id" => Auth::user()->id,
             "name" => $request['name'],
             "time" => $request['time'],
             "image" => $request['image'],
