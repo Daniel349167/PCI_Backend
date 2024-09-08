@@ -21,6 +21,7 @@ Route::middleware(['api', 'web'])->group(function () {
 
 Route::post('register', [ApiController::class, 'register']);
 Route::post('login', [ApiController::class, 'login']);
+Route::post('logout', [ApiController::class, 'logout']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('profile', [ApiController::class, 'profile']);
