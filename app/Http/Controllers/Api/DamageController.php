@@ -11,7 +11,7 @@ class DamageController extends Controller
     public function index($id)
     {
         $damages = Damage::select('id', 'number', 'time', 'type', 'severity', 'amount')
-            ->where('sample_id', $id)->orderBy('id', 'asc')->get();
+            ->where('sample_id', $id)->where('deleted_at', null)->orderBy('id', 'asc')->get();
         return $damages;
     }
 
@@ -46,5 +46,11 @@ class DamageController extends Controller
     {
         $damage = Damage::find($id);
         $damage->delete();
+    }
+    public function lazy_delete($id)
+    {
+        $damage = Damage::find($id);
+        $damage->deleted_at = now();
+        $damage->save();
     }
 }

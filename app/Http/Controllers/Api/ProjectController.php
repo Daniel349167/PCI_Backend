@@ -16,7 +16,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::where('user_id', Auth::user()->id)->orderBy('id', 'asc')->get();
+        $projects = Project::where('user_id', Auth::user()->id)->where('deleted_at', null)->orderBy('id', 'asc')->get();
         foreach($projects as $project)
             $project->image = ProjectController::image($project);
         return $projects;
@@ -79,6 +79,12 @@ class ProjectController extends Controller
             $sample->delete();
         }
         $project->delete();
+    }
+    public function lazy_delete($id)
+    {
+        $project = Project::find($id);
+        $project->deleted_at = now();
+        $project->save();
     }
 
     public function updateProjectName(Request $request, $id)
