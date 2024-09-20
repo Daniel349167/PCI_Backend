@@ -12,6 +12,11 @@ use App\Http\Controllers\Api\DamageController;
 use App\Http\Controllers\Api\DamageMeasurementController;
 use App\Http\Controllers\Api\DeductedValuesController;
 use App\Http\Controllers\Api\PCIController;
+use App\Http\Controllers\Auth\TokenValidationController;
+
+Route::middleware('auth:sanctum')->post('/auth/validate', [TokenValidationController::class, 'validateToken']);
+
+
 
 Route::middleware(['api', 'web'])->group(function () {
     Route::get('auth/google', [SocialiteController::class, 'redirectToGoogle']);
