@@ -54,7 +54,7 @@ class SocialiteController extends Controller
                 Auth::login($user, true);
     
                 // Generar token de acceso si la app usa tokens de API (Laravel Passport o Sanctum)
-                $token = $user->createToken('GoogleAuthToken')->plainTextToken;
+                $token = $user->createToken('apiToken')->plainTextToken;
     
                 // Devolver la respuesta al frontend con el token generado
                 return response()->json([
