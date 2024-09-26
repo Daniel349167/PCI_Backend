@@ -48,8 +48,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('damages/{id}/update', [DamageController::class, 'update']);
     Route::get('damages/{id}/image', [DamageController::class, 'getImage']);
     
-    Route::delete('projects/{id}', [ProjectController::class, 'delete']);
-    Route::delete('damages/{id}', [DamageController::class, 'delete']);
+    Route::delete('projects/{id}', [ProjectController::class, 'lazy_delete']);
+    Route::delete('damages/{id}', [DamageController::class, 'lazy_delete']);
 
     //Metrado de Daños
     Route::get('damage-measurement/{projectId}/{sampleId}', [DamageMeasurementController::class, 'getSummaryBySampleId']);
